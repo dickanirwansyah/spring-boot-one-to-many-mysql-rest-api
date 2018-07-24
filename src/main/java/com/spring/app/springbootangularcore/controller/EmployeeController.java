@@ -5,6 +5,7 @@ import com.spring.app.springbootangularcore.exception.NotFoundException;
 import com.spring.app.springbootangularcore.repository.DepartemenRepository;
 import com.spring.app.springbootangularcore.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -47,5 +48,19 @@ public class EmployeeController {
                                return employeeRepository.save(employee);
                            }).orElseThrow(() -> new NotFoundException("sorry empolyee id notfound"));
                }).orElseThrow(()-> new NotFoundException("sorry departemen id "+departemenId+" not found"));
+    }
+
+    @DeleteMapping(value = "/delete/{departemenId}/employee/{employeeId}")
+    public ResponseEntity<?> delete(@PathVariable("departemenId")long departemenId,
+                                    @PathVariable("employeeId")String employeeId){
+
+        return departemenRepository.findById(departemenId)
+                .map(departement -> {
+                    return employeeRepository.findById(employeeId)
+                            .map(employee -> {
+                                employeeRepository.delete(employee);
+                                return ResponseEntity.ok().build();
+                            }).orElseThrow(()-> new NotFoundException("employee id not found"));
+                }).orElseThrow(() -> new NotFoundException("departement id "+departemenId+" not found"));
     }
 }
