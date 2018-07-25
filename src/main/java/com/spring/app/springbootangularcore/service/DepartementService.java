@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface DepartementService {
 
     Departement createDepartemen(DepartementRequest request);
+    Departement updateDepartemen(long departementId, DepartementRequest request);
     List<Departement> listDepartemen();
     Optional<Departement> findByDepartemenId(long departementId);
 }

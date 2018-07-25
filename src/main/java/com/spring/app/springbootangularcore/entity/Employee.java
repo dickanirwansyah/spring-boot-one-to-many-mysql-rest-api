@@ -30,6 +30,9 @@ public class Employee {
     @Column(name = "salary", nullable = false)
     private long salary;
 
+    @Column(name = "active", nullable = false)
+    private boolean active;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "iddepartement", nullable = false)
     private Departement departement;

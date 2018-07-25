@@ -9,7 +9,10 @@ import lombok.Data;
 @Builder
 public class DepartementRequest {
 
+    private long departementId;
+
     @EmployeeValidation
     private String departementName;
 
+    private boolean departementActive;
 }

@@ -9,9 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping(value = "/api/employee")
+@CrossOrigin(origins = {"*"})
 public class EmployeeController {
 
     @Autowired
@@ -19,6 +23,13 @@ public class EmployeeController {
 
     @Autowired
     private DepartemenRepository departemenRepository;
+
+    @GetMapping
+    public List<Employee> list(){
+        List<Employee> employees = new ArrayList<>();
+        employeeRepository.findAll().forEach(employees::add);
+        return employees;
+    }
 
     @PostMapping(value = "/create/{departemenId}/employee")
     public Employee create(@PathVariable("departemenId")long departemenId,

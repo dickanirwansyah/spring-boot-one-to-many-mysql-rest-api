@@ -18,5 +18,7 @@ public class Departement {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "active")
+    private boolean active;
 
 }

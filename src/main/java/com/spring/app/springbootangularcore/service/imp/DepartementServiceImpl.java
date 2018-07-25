@@ -23,6 +23,11 @@ public class DepartementServiceImpl implements DepartementService {
         return departemenRepository.save(departement);
     }
 
+    @Override
+    public Departement updateDepartemen(long departementId, DepartementRequest request) {
+        return null;
+    }
+
     private Departement newDepartement(String name){
         return Departement.builder()
                 .name(name)
